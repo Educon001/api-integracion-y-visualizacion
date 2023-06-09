@@ -1,4 +1,6 @@
-CREATE DATABASE Datamart_Equipo1;
+CREATE DATABASE datamart_equipo1;
+
+\connect datamart_equipo1
 
 CREATE TABLE sucursal
 (
@@ -13,11 +15,12 @@ CREATE TABLE sucursal
 
 CREATE TABLE tiempo
 (
-    id_anio INT,
-    id_mes  INT,
-    id_dia  INT,
-    id_hora INT,
-    CONSTRAINT pk_tiempo PRIMARY KEY (id_anio, id_mes, id_dia, id_hora)
+    id_tiempo SERIAL,
+    id_anio   INT,
+    id_mes    INT,
+    id_dia    INT,
+    id_hora   INT,
+    CONSTRAINT pk_tiempo PRIMARY KEY (id_tiempo)
 );
 
 CREATE TABLE metodo_Pagos
@@ -41,16 +44,10 @@ CREATE TABLE modelo_Vehiculos
     CONSTRAINT pk_vehiculo PRIMARY KEY (id_modelo)
 );
 
-CREATE TABLE estadictica_sucursal
+CREATE TABLE estadisticas_sucursal
 (
     id                            SERIAL,
-    id_alquiler                   INT,
-    id_vehiculo                   INT,
-    id_metodo_pago                INT,
-    id_anio                       INT,
-    id_mes                        INT,
-    id_dia                        INT,
-    id_hora                       INT,
+    id_tiempo                     INT,
     id_sucursal                   INT,
     balance_general               FLOAT,
     porc_ingresos_egresos         FLOAT,
@@ -70,11 +67,8 @@ CREATE TABLE estadictica_sucursal
 
 
     CONSTRAINT PK_hecho PRIMARY KEY (id),
-    CONSTRAINT fk_hecho_vehiculo FOREIGN KEY (id_vehiculo) references modelo_Vehiculos (id_modelo),
-    CONSTRAINT fk_hecho_metodo_pago FOREIGN KEY (id_metodo_pago) references metodo_Pagos (id_metodo),
-    CONSTRAINT fk_hecho_tiempo FOREIGN KEY (id_anio) references tiempo (id_anio),
-    CONSTRAINT fk_hecho_tiempo FOREIGN KEY (id_mes) references tiempo (id_mes),
-    CONSTRAINT fk_hecho_tiempo FOREIGN KEY (id_dia) references tiempo (id_dia),
-    CONSTRAINT fk_hecho_tiempo FOREIGN KEY (id_hora) references tiempo (id_hora),
+    CONSTRAINT fk_hecho_vehiculo FOREIGN KEY (modelo_vehiculo_id_modelo) references modelo_Vehiculos (id_modelo),
+    CONSTRAINT fk_hecho_metodo_pago FOREIGN KEY (metodo_pago_id_metodo) references metodo_Pagos (id_metodo),
+    CONSTRAINT fk_hecho_tiempo FOREIGN KEY (id_tiempo) references tiempo (id_tiempo),
     CONSTRAINT fk_hecho_sucursal FOREIGN KEY (id_sucursal) references sucursal (id_sucursal)
 );
