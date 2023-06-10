@@ -56,7 +56,7 @@ app.get('/fetch_data', async (req, res) => {
             for (let key in row) {
                 if (key === 'id_anio' || key === 'id_mes' || key === 'id_dia' || key === 'id_hora') {
                     tiempoObj[key] = row[key];
-                } else if (key === 'id_tiempo' || key === 'id_sucursal' || key === 'id') {
+                } else if (key === 'id_tiempo' || key === 'id_sucursal' || key === 'id' || key === 'fecha_carga') {
                 } else {
                     sucursalObj[key] = row[key];
                 }

@@ -6,7 +6,7 @@ CREATE TABLE sucursal
 (
     id_sucursal SERIAL,
     nombre      VARCHAR(200),
-    fecha_carga DATE DEFAULT CURRENT_DATE,
+    fecha_carga TIMESTAMP DEFAULT now(),
     ubicacion   VARCHAR(350),
     longitud    NUMERIC,
     latitud     NUMERIC,
@@ -16,6 +16,7 @@ CREATE TABLE sucursal
 CREATE TABLE tiempo
 (
     id_tiempo SERIAL,
+    fecha_carga TIMESTAMP DEFAULT now(),
     id_anio   INT,
     id_mes    INT,
     id_dia    INT,
@@ -27,7 +28,7 @@ CREATE TABLE metodo_Pagos
 (
     id_metodo   SERIAL,
     nombre      VARCHAR(200),
-    fecha_carga DATE DEFAULT CURRENT_DATE,
+    fecha_carga TIMESTAMP DEFAULT now(),
     CONSTRAINT pk_metodo_pago PRIMARY KEY (id_metodo)
 );
 
@@ -37,7 +38,7 @@ CREATE TABLE modelo_Vehiculos
     nombre_modelo    VARCHAR(250),
     anio_fabricacion INT,
     tipo_vehiculo    VARCHAR(250),
-    fecha_carga      DATE DEFAULT CURRENT_DATE,
+    fecha_carga      TIMESTAMP DEFAULT now(),
     marca            VARCHAR(250),
     modelo           VARCHAR(250),
 
