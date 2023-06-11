@@ -15,12 +15,12 @@ CREATE TABLE sucursal
 
 CREATE TABLE tiempo
 (
-    id_tiempo SERIAL,
+    id_tiempo   SERIAL,
     fecha_carga TIMESTAMP DEFAULT now(),
-    id_anio   INT,
-    id_mes    INT,
-    id_dia    INT,
-    id_hora   INT,
+    id_anio     INT,
+    id_mes      INT,
+    id_dia      INT,
+    id_hora     INT,
     CONSTRAINT pk_tiempo PRIMARY KEY (id_tiempo)
 );
 
@@ -37,39 +37,40 @@ CREATE TABLE modelo_Vehiculos
     id_modelo        SERIAL,
     nombre_modelo    VARCHAR(250),
     anio_fabricacion INT,
-    tipo_vehiculo    VARCHAR(250),
     fecha_carga      TIMESTAMP DEFAULT now(),
     marca            VARCHAR(250),
-    modelo           VARCHAR(250),
 
     CONSTRAINT pk_vehiculo PRIMARY KEY (id_modelo)
 );
 
 CREATE TABLE estadisticas_sucursal
 (
-    id                            SERIAL,
-    id_tiempo                     INT,
-    id_sucursal                   INT,
-    balance_general               FLOAT,
-    porc_ingresos_egresos         FLOAT,
-    porc_vehiculos_utilizados     FLOAT,
-    porc_vehiculos_disponibles    FLOAT,
-    porc_satisfaccion_cliente     FLOAT,
-    top_metodo_pago_utilizado     VARCHAR(250),
-    top_modelo_vehiculo_alquilado VARCHAR(250),
-    modelo_veces_alquilado        INT,
-    modelo_porcentaje_alquilado   FLOAT,
-    modelo_vehiculo_id_modelo     INT,
-    metodo_pago_id_metodo         INT,
-    ingresos                      FLOAT,
-    egresos                       FLOAT,
-    duracion_promedio_alquiler    FLOAT,
-    total_alquileres              FLOAT,
+    id                                     SERIAL,
+    id_tiempo                              INT,
+    id_sucursal                            INT,
+    porc_Satisfaccion_Cliente              FLOAT,
+    id_metodo_pago                         INT,
+    posicion_top_metodo_pago_utilizado     INT,
+    metodo_pago_veces_utilizado            INT,
+    porcentaje_utilizacion_metodo_pago     FLOAT,
+    id_modelo_vehiculo                     INT,
+    posicion_top_modelo_vehiculo_alquilado INT,
+    modelo_veces_alquilado                 INT,
+    modelo_porcentaje_alquilado            FLOAT,
+    ingresos                               FLOAT,
+    egresos                                FLOAT,
+    porc_ingresos                          FLOAT,
+    porc_egresos                           FLOAT,
+    ganancia_neta                          FLOAT,
+    porc_vehiculos_disponibles             FLOAT,
+    duracion_promedio_alquiler             FLOAT,
+    total_alquileres                       INT,
+    porc_vehiculos_utilizados              FLOAT,
 
 
     CONSTRAINT PK_hecho PRIMARY KEY (id),
-    CONSTRAINT fk_hecho_vehiculo FOREIGN KEY (modelo_vehiculo_id_modelo) references modelo_Vehiculos (id_modelo),
-    CONSTRAINT fk_hecho_metodo_pago FOREIGN KEY (metodo_pago_id_metodo) references metodo_Pagos (id_metodo),
+    CONSTRAINT fk_hecho_vehiculo FOREIGN KEY (id_modelo_vehiculo) references modelo_Vehiculos (id_modelo),
+    CONSTRAINT fk_hecho_metodo_pago FOREIGN KEY (id_metodo_pago) references metodo_Pagos (id_metodo),
     CONSTRAINT fk_hecho_tiempo FOREIGN KEY (id_tiempo) references tiempo (id_tiempo),
     CONSTRAINT fk_hecho_sucursal FOREIGN KEY (id_sucursal) references sucursal (id_sucursal)
 );
