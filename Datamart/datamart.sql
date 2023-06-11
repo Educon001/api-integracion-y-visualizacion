@@ -2,6 +2,8 @@ CREATE DATABASE datamart_equipo1;
 
 \connect datamart_equipo1
 
+SET TIMEZONE TO '-04';
+
 CREATE TABLE sucursal
 (
     id_sucursal SERIAL,
