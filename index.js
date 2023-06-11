@@ -1,5 +1,6 @@
 const express = require('express');
 const {Pool} = require('pg');
+const {ssl} = require("pg/lib/defaults");
 require('dotenv').config();
 
 const app = express();
@@ -11,6 +12,7 @@ const pool = new Pool({
     database: process.env.DB_NAME,
     password: process.env.DB_PASSWORD,
     port: Number(process.env.DB_PORT),
+    ssl: true
 });
 
 pool.on('error', (err) => {
