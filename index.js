@@ -35,7 +35,8 @@ app.get('/fetch_data', async (req, res) => {
             FROM metodo_Pagos;
             SELECT *
             FROM estadisticas_sucursal es
-                     join tiempo t on t.id_tiempo = es.id_tiempo;
+                     join tiempo t on t.id_tiempo = es.id_tiempo
+            order by t.id_anio, t.id_mes, t.id_dia, t.id_hora;
         `;
 
         const client = await pool.connect();
