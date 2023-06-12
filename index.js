@@ -61,6 +61,8 @@ app.get('/fetch_data', async (req, res) => {
                 if (key === 'id_anio' || key === 'id_mes' || key === 'id_dia' || key === 'id_hora') {
                     tiempoObj[key] = row[key];
                 } else if (key === 'id_tiempo' || key === 'id_sucursal' || key === 'id' || key === 'fecha_carga') {
+                } else if (key === 'porc_satisfaccion_cliente'){
+                    sucursalObj['porc_Satisfaccion_Cliente'] = row[key];
                 } else {
                     sucursalObj[key] = row[key];
                 }
@@ -69,7 +71,8 @@ app.get('/fetch_data', async (req, res) => {
             // Add the formatted row object to the array
             formattedEstadisticas.push(sucursalObj);
         }
-
+        formattedEstadisticas.porc_Satisfaccion_Cliente = formattedEstadisticas['porc_satisfaccion_cliente'];
+        delete formattedEstadisticas['porc_satisfaccion_cliente'];
 
         const data = {
             sucursal: sucursal.rows[0],
